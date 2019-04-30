@@ -9,7 +9,7 @@ extern Game *game;
 
 TowerC::TowerC(QGraphicsItem *parent){
     //se crea los graficos
-    setPixmap(QPixmap(":/images/tower2.png"));
+    setPixmap(QPixmap(":/images/fire_tower.gif"));
 
     //se crea el vector de puntos
     QVector<QPointF> points;
@@ -24,14 +24,17 @@ TowerC::TowerC(QGraphicsItem *parent){
     }
 
     //se crea el QGraphicsPolygonItem
+    QPen *pen = new QPen();
+    pen->setStyle(Qt::DotLine);
+    pen->setWidth(3);
     attack_area = new QGraphicsPolygonItem(QPolygonF(points), this);
-    attack_area->setPen(QPen(Qt::DotLine));
+    attack_area->setPen(*pen);
 
     //se mueve el poligono
     QPointF poly_center(0.5,0.5);
     poly_center *= SCALE_FACTOR;
     poly_center = mapToScene(poly_center);
-    QPointF tower_center(x()+40, y()+34);
+    QPointF tower_center(x()+20, y()+40);
     QLineF ln(poly_center, tower_center);
     attack_area->setPos(x()+ln.dx(), y()+ ln.dy());
 
@@ -69,8 +72,19 @@ void TowerC::aquire_target(){
     double closest_dist = 300;
     QPointF closest_pt = QPointF(0,0);
     for(size_t i =0; i < colliding_items.size(); i++){
-        Enemy *enemy = dynamic_cast<Enemy*>(colliding_items[i]);
-        if(enemy){
+        if(typeid(*(colliding_items[i])) == typeid (Enemy)){
+            Enemy *enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+            double this_dist = distanceTo(enemy);
+            if(this_dist < closest_dist){
+                closest_dist = this_dist;
+                closest_pt = QPointF(colliding_items[i]->x()+32.5, colliding_items[i]->y()+20.5);
+                attack_dest = closest_pt;
+                //has_target = true;
+                fire();
+            }
+        }
+        else if(typeid(*(colliding_items[i])) == typeid (Enemy2)){
+            Enemy2 *enemy = dynamic_cast<Enemy2*>(colliding_items[i]);
             double this_dist = distanceTo(enemy);
             if(this_dist < closest_dist){
                 closest_dist = this_dist;
@@ -85,5 +99,5 @@ void TowerC::aquire_target(){
 }
 
 void TowerC::asingPos(int fil, int col){
-    setPos(col*70+ 485, fil*70 + 5);
+    setPos(col*70+ 505, fil*70);
 }

@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+         multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,12 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    enemy2.cpp \
         main.cpp \
     game.cpp \
-    piece.cpp \
     board.cpp \
     point.cpp \
     specs.cpp \
+    square.cpp \
     towera.cpp \
     towerb.cpp \
     towerc.cpp \
@@ -40,11 +42,48 @@ SOURCES += \
     enemy.cpp
 
 HEADERS += \
+    enemy2.h \
     game.h \
-    piece.h \
     board.h \
+    include/rapidjson/allocators.h \
+    include/rapidjson/cursorstreamwrapper.h \
+    include/rapidjson/document.h \
+    include/rapidjson/encodedstream.h \
+    include/rapidjson/encodings.h \
+    include/rapidjson/error/en.h \
+    include/rapidjson/error/error.h \
+    include/rapidjson/filereadstream.h \
+    include/rapidjson/filewritestream.h \
+    include/rapidjson/fwd.h \
+    include/rapidjson/internal/biginteger.h \
+    include/rapidjson/internal/diyfp.h \
+    include/rapidjson/internal/dtoa.h \
+    include/rapidjson/internal/ieee754.h \
+    include/rapidjson/internal/itoa.h \
+    include/rapidjson/internal/meta.h \
+    include/rapidjson/internal/pow10.h \
+    include/rapidjson/internal/regex.h \
+    include/rapidjson/internal/stack.h \
+    include/rapidjson/internal/strfunc.h \
+    include/rapidjson/internal/strtod.h \
+    include/rapidjson/internal/swap.h \
+    include/rapidjson/istreamwrapper.h \
+    include/rapidjson/memorybuffer.h \
+    include/rapidjson/memorystream.h \
+    include/rapidjson/msinttypes/inttypes.h \
+    include/rapidjson/msinttypes/stdint.h \
+    include/rapidjson/ostreamwrapper.h \
+    include/rapidjson/pointer.h \
+    include/rapidjson/prettywriter.h \
+    include/rapidjson/rapidjson.h \
+    include/rapidjson/reader.h \
+    include/rapidjson/schema.h \
+    include/rapidjson/stream.h \
+    include/rapidjson/stringbuffer.h \
+    include/rapidjson/writer.h \
     point.h \
     specs.h \
+    square.h \
     towera.h \
     towerb.h \
     towerc.h \

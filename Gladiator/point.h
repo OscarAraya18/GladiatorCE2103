@@ -5,7 +5,7 @@
 class Point{
 
 public:
-    Point(int fila, int columna);
+    Point(int fila, int columna, int vida);
 
     int getFila() const;
 
@@ -15,9 +15,14 @@ public:
 
     void setColumna(int value);
 
+    int getVida() const;
+
+    void setVida(int value);
+
 private:
     int fila;
     int columna;
+    int vida;
 };
 
 #endif // POINT_H

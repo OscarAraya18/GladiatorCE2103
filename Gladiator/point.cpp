@@ -1,8 +1,9 @@
 #include "point.h"
 
-Point::Point(int fil,int col){
+Point::Point(int fil,int col, int v){
     this->fila = fil;
     this->columna = col;
+    this->vida = v;
 }
 
 int Point::getFila() const
@@ -23,4 +24,14 @@ int Point::getColumna() const
 void Point::setColumna(int value)
 {
     columna = value;
+}
+
+int Point::getVida() const
+{
+    return vida;
+}
+
+void Point::setVida(int value)
+{
+    vida = value;
 }

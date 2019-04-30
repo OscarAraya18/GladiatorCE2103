@@ -25,8 +25,11 @@ TowerB::TowerB(QGraphicsItem *parent){
     }
 
     //se crea el QGraphicsPolygonItem
+    QPen *pen = new QPen();
+    pen->setStyle(Qt::DotLine);
+    pen->setWidth(3);
     attack_area = new QGraphicsPolygonItem(QPolygonF(points), this);
-    attack_area->setPen(QPen(Qt::DotLine));
+    attack_area->setPen(*pen);
 
     //se mueve el poligono
     QPointF poly_center(0.5,0.5);
@@ -39,7 +42,7 @@ TowerB::TowerB(QGraphicsItem *parent){
     //se conecta un timer con attack_target
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()),this, SLOT(aquire_target()));
-    timer->start(1000);
+    timer->start(400);
 
 
 }
@@ -77,8 +80,19 @@ void TowerB::aquire_target(){
     double closest_dist = 300;
     QPointF closest_pt = QPointF(0,0);
     for(size_t i =0; i < colliding_items.size(); i++){
-        Enemy *enemy = dynamic_cast<Enemy*>(colliding_items[i]);
-        if(enemy){
+        if(typeid(*(colliding_items[i])) == typeid (Enemy)){
+            Enemy *enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+            double this_dist = distanceTo(enemy);
+            if(this_dist < closest_dist){
+                closest_dist = this_dist;
+                closest_pt = QPointF(colliding_items[i]->x()+32.5, colliding_items[i]->y()+20.5);
+                attack_dest = closest_pt;
+                //has_target = true;
+                fire();
+            }
+        }
+        else if(typeid(*(colliding_items[i])) == typeid (Enemy2)){
+            Enemy2 *enemy = dynamic_cast<Enemy2*>(colliding_items[i]);
             double this_dist = distanceTo(enemy);
             if(this_dist < closest_dist){
                 closest_dist = this_dist;

@@ -34,6 +34,8 @@ public:
     QGraphicsRectItem *fTroncoInf;
     QGraphicsTextItem *fTroncoInfT;
 
+    void setVida(QString edad);
+
 
 };
 

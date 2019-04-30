@@ -1,8 +1,11 @@
 #include "enemy.h"
 #include "firearrow.h"
+#include "game.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <qmath.h>
+
+extern Game *game;
 
 FireArrow::FireArrow(QGraphicsItem *parent){
     setPixmap(QPixmap(":/images/firearrow.png"));
@@ -42,14 +45,20 @@ void FireArrow::setDistanceTravelled(double dis)
 void FireArrow::move(){
     QList<QGraphicsItem*> colliding_items =collidingItems();
     for( int i = 0; i < colliding_items.size(); i++){
-        if(typeid(*(colliding_items[i])) == typeid (Enemy)){
+        if(typeid(*(colliding_items[i])) == typeid (Enemy) || typeid(*(colliding_items[i])) == typeid (Enemy2)
+                || 500>x() || x()>1000 || y()<5 || y() > 1000){
 
+            if(typeid(*(colliding_items[i])) == typeid (Enemy)){
+                //Sgame->board->enemy->delete_gladiator(game->board->enemy->x(), game->board->enemy->y());
+
+            }
+            else if(typeid(*(colliding_items[i])) == typeid (Enemy2)){
+                //game->board->enemy2->delete_gladiator(game->board->enemy->x(), game->board->enemy->y());
+            }
             //remueve la bala
-            //scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
             // libera memoria
             delete this;
-           // delete colliding_items[i];
             return;
         }
     }

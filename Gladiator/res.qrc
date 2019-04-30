@@ -7,7 +7,14 @@
         <file>enemy.png</file>
         <file>explosivearrow.png</file>
         <file>firearrow.png</file>
-        <file>piedra.jpg</file>
         <file>madera.png</file>
+        <file>fire_tower.gif</file>
+        <file>caca.png</file>
+        <file>rip.png</file>
+        <file>piedra.jpeg</file>
+        <file>fondo.jpg</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>music.mp3</file>
     </qresource>
 </RCC>

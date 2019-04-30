@@ -25,7 +25,7 @@ void Specs::crearSpecs()
     QBrush brush;
 
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::white);
+    brush.setColor(Qt::gray);
 
     //para el ID
     Id = new QGraphicsRectItem();
@@ -118,3 +118,10 @@ void Specs::crearSpecs()
     game->scene->addItem(resistenciaT);
 
 }
+
+void Specs::setVida(QString vida)
+{
+    resistenciaT->setPlainText("Resistencia: " + vida);
+}
+
+

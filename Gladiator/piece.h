@@ -6,6 +6,7 @@ class Piece: public QGraphicsRectItem
 {
 public:
     Piece(QGraphicsItem *parent=0);
+
 };
 
 #endif // PIECE_H

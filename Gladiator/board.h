@@ -22,6 +22,14 @@ public:
     QGraphicsTextItem *getC1() const;
     void setC1(QString value);
 
+    void agregarGladiator1();
+    void agregarGladiator2();
+
+    void agregarTorre1(int x, int y);
+    void agregarTorre2(int x, int y);
+    void agregarTorre3(int x, int y);
+
+
     Specs *specs;
     Specs *specs2;
 

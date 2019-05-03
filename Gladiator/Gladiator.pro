@@ -26,6 +26,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    boton.cpp \
+    cliente.cpp \
+    converter.cpp \
     enemy2.cpp \
         main.cpp \
     game.cpp \
@@ -42,6 +45,9 @@ SOURCES += \
     enemy.cpp
 
 HEADERS += \
+    boton.h \
+    cliente.h \
+    converter.h \
     enemy2.h \
     game.h \
     board.h \

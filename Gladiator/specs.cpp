@@ -119,6 +119,52 @@ void Specs::crearSpecs()
 
 }
 
+void Specs::setFTroncoInfT(QString value)
+{
+    fTroncoInfT->setPlainText("TRONCO INFERIOR "+ value);
+}
+
+void Specs::setFTroncoSupT(QString value)
+{
+    fTroncoSupT->setPlainText("TRONCO SUPERIOR " +value);
+}
+
+void Specs::setCondFisicaT(QString value)
+{
+    condFisicaT->setPlainText("COND FISICA "+ value);
+}
+
+void Specs::setIEmocionalT(QString value)
+{
+    iEmocionalT->setPlainText("I EMOCIONAL "+ value);
+}
+
+void Specs::setGenEsperadasT(QString value)
+{
+    genEsperadasT->setPlainText("GEN ESPERADAS "+ value);
+}
+
+void Specs::setProbSuperT(QString value)
+{
+    probSuperT->setPlainText("PROBABILIDAD SUPER "+ value);
+}
+
+void Specs::setEdadT(QString value)
+{
+    edadT->setPlainText("EDAD "+ value);
+}
+
+void Specs::setIdT(QString value)
+{
+    IdT->setPlainText("ID "+ value);
+}
+
+
+void Specs::setResistenciaT(QString value)
+{
+    resistenciaT->setPlainText("RESISTENCIA "+ value);
+}
+
 void Specs::setVida(QString vida)
 {
     resistenciaT->setPlainText("Resistencia: " + vida);

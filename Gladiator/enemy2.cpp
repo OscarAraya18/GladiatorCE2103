@@ -7,12 +7,16 @@ extern Game *game;
 
 Enemy2::Enemy2(QGraphicsItem *parent ){
     setPixmap(QPixmap(":/images/enemy.png"));
+    tiempo =0;
 
     //se agregan los puntos
     points << QPointF(200,200) << QPointF(400,200);
     //rotateToPoint(dest);
 
     timer = new QTimer();
+    crono = new QTimer();
+    //connect(crono, SIGNAL(timeout()), this, SLOT(actualizar_crono()));
+    //crono->start(1000);
 
 }
 
@@ -33,7 +37,7 @@ void Enemy2::move_gladiator()
     //conectar el timer con move()
 
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(1500);
+    timer->start(600);
 }
 
 void Enemy2::move(){
@@ -50,6 +54,12 @@ void Enemy2::move(){
 void Enemy2::rip_g()
 {
 
+}
+
+void Enemy2::actualizar_crono()
+{
+    tiempo++;
+    game->board->setC2(QString::number(tiempo));
 }
 void Enemy2::delete_gladiator(int x, int y)
 {

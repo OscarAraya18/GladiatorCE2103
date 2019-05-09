@@ -1,9 +1,9 @@
 #include "board.h"
 #include "boton.h"
 #include "game.h"
-
+#include "grafico.h"
 #include <QMediaPlayer>
-
+extern grafico *Grafico;
 Game::Game(QWidget *parent){
 
     scene = new QGraphicsScene();
@@ -33,11 +33,13 @@ Game::Game(QWidget *parent){
     conexion = new Cliente();
     iniciarConexion();
 
+    show();
+
 }
 
 void Game::iniciarConexion()
 {
-    if(conexion->connectar()){
+    if(conexion->conectar()){
         connect(conexion, SIGNAL(NewMensaje(QString)), SLOT(recibirMensaje(QString)));
         cout << "Conexion exitosa" << endl;
     }
@@ -56,13 +58,11 @@ void Game::recibirMensaje(QString mensaje)
 {
     cout << mensaje.toStdString() << endl;
 
+    converter->funcionGeneral(mensaje.toStdString().c_str());
 
 }
-
 void Game::iniciarIteracion()
 {
     string mensaje = converter->iniciarIte();
-    sendMessage(mensaje);
-
-
+   sendMessage(mensaje);
 }

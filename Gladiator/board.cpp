@@ -23,6 +23,21 @@ void Board::drawBoard(){
     int x = 490;
     QFont fuente("comic sans", 12);
 
+    inicio = new QGraphicsRectItem(493,7,65,65);
+
+    final = new QGraphicsRectItem(1121,637, 65,65);
+    QPen *pen2 = new QPen(Qt::red);
+    pen2->setStyle(Qt::SolidLine);
+    pen2->setWidth(3);
+
+    QPen *pen3 = new QPen(Qt::green);
+    pen3->setStyle(Qt::SolidLine);
+    pen3->setWidth(3);
+
+    inicio->setPen(*pen3);
+    final->setPen(*pen2);
+
+
     for(int i=0; i<10; i++){
         for(int j=0; j<10; j++){
             Square *piece = new Square();
@@ -46,9 +61,13 @@ void Board::drawBoard(){
     c1 = new QGraphicsTextItem("0");
     c1->setPos(350, 85);
     c1->setFont(fuente);
+
     game->scene->addItem(crono1);
     game->scene->addItem(c1);
     game->scene->addItem(title1);
+
+    game->scene->addItem(inicio);
+    game->scene->addItem(final);
 
 
     //Cronometro para el gladiador 1
@@ -57,10 +76,10 @@ void Board::drawBoard(){
     crono2->setBrush(QBrush(Qt::lightGray));
     QGraphicsTextItem *title2 = new QGraphicsTextItem("Tiempo G2:");
     title2->setFont(fuente);
-    title2->setPos(350,385);
-    crono2->setRect(350, 380, 100,70);
+    title2->setPos(350,428);
+    crono2->setRect(350, 428, 100,70);
     c2 = new QGraphicsTextItem("0");
-    c2->setPos(350, 410);
+    c2->setPos(350, 448);
     c2->setFont(fuente);
 
 
@@ -73,7 +92,7 @@ void Board::drawBoard(){
 
 
     specs->setPos(25, 60);
-    specs2->setPos(25, 380);
+    specs2->setPos(25, 428);
     game->scene->addItem(specs);
     game->scene->addItem(specs2);
 

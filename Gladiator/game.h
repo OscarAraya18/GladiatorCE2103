@@ -3,7 +3,6 @@
 #include "board.h"
 #include "cliente.h"
 #include "converter.h"
-
 #include <QGraphicsView>
 #include <QGraphicsScene>
 /**
@@ -43,6 +42,7 @@ public:
      * @brief conexion La instancia del cliente.
      */
     Cliente *conexion;
+     QVector<double> fitness1, fitness2;
 public slots:
     /**
      * @brief recibirMensaje Recibe los mensajes que llegan de parte del servidor.
@@ -53,6 +53,7 @@ public slots:
      * @brief iniciarIteracion Pide los datos de la iteracion al servidor.
      */
     void iniciarIteracion();
+
 
 };
 

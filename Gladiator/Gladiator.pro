@@ -3,7 +3,7 @@
 # Project created by QtCreator 2019-04-20T13:36:35
 #
 #-------------------------------------------------
-
+RC_ICONS = iconn.ico
 QT       += core gui\
          multimedia
 
@@ -107,7 +107,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     grafico.ui
-RC_ICONS = icon.ico
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

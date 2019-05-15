@@ -7,12 +7,7 @@ grafico::grafico(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QVector<double> gen1, fitness1, gen2, fitness2;
-    gen1 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 16 << 17 << 18 << 19 << 20;
-    gen2 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 16 << 17 << 18 << 19 << 20;
-    fitness1 << 1.23 << 1.89 << 2.43  << 4.65 << 6.32 << 25.32 << 30.56 << 43.23 << 54.24 << 57.23 << 63.78 << 63.78 << 68.9 << 72.13 << 76.23 << 81.48 << 87.23 << 93.45 << 94.2 << 97.32;
-    fitness2 << 1.34 << 2.45 << 10.43  << 16.67 << 18.45 << 24.23 << 26.67 << 45.23 << 50.23 << 55.7 << 55.9 << 57.98 << 60.34 << 64.33 << 66.45 << 75.67 << 82.45 << 86.34 << 95.34 << 96.45;
-    grafico::desplegarGrafica(gen1,fitness1,gen2,fitness2);
+
 }
 
 grafico::~grafico()
@@ -20,8 +15,17 @@ grafico::~grafico()
     delete ui;
 }
 
-void grafico::desplegarGrafica(QVector<double> gen1, QVector<double> fitness1, QVector<double> gen2, QVector<double> fitness2)
+void grafico::desplegarGrafica(QVector<double> fitness1, QVector<double> fitness2)
 {
+    //crear los vectores de las generaciones
+
+    QVector<double> gen1, gen2;
+    for(int i = 1; i < fitness1.size()+1; i++){
+        gen1.append(i);
+    }
+    for(int j = 1; j < fitness2.size()+1;j++){
+        gen2.append(j);
+    }
     QLinearGradient plotGradient;
     plotGradient.setStart(0, 0);
     plotGradient.setFinalStop(0, 350);
@@ -36,7 +40,7 @@ void grafico::desplegarGrafica(QVector<double> gen1, QVector<double> fitness1, Q
     pen.setWidthF(2.5);
     ui->customPlot->graph(0)->setPen(pen);
     ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 10));
-    ui->customPlot->graph(0)->setName("Avance del fitness de la primera poblaciòn");
+    ui->customPlot->graph(0)->setName("Avance de la poblacion con Pathfinding");
     //segundo grafico
     ui->customPlot->addGraph();
     ui->customPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
@@ -45,7 +49,7 @@ void grafico::desplegarGrafica(QVector<double> gen1, QVector<double> fitness1, Q
     pen2.setWidthF(2.5);
     ui->customPlot->graph(1)->setPen(pen2);
     ui->customPlot->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 10));
-    ui->customPlot->graph(1)->setName("Avance del fitness de la segunda poblaciòn");
+    ui->customPlot->graph(1)->setName("Avance de la poblacion con Backtracking");
     // Agregarle los datos a las dos lineas
 
     //agregar datos a la linea de la primera poblacion
@@ -67,7 +71,7 @@ void grafico::desplegarGrafica(QVector<double> gen1, QVector<double> fitness1, Q
     ui->customPlot->yAxis2->setTicks(false);
     ui->customPlot->xAxis2->setSubTicks(false);
     ui->customPlot->yAxis2->setSubTicks(false);
-    ui->customPlot->xAxis->setRange(0, 20);
+    ui->customPlot->xAxis->setRange(0, 10);
     ui->customPlot->yAxis->setRange(0, 100);
     // setup legend:
     ui->customPlot->legend->setFont(QFont(font().family(), 7));

@@ -26,7 +26,7 @@ public slots:
      * @param gen2 Las generaciones de la segunda poblacion.
      * @param fitness2 Los promedios del fitness de las generaciones de la segunda poblacion.
      */
-    void desplegarGrafica(QVector<double> gen1, QVector<double> fitness1, QVector<double> gen2, QVector<double> fitness2);
+    void desplegarGrafica(QVector<double> fitness1, QVector<double> fitness2);
 private:
     Ui::grafico *ui;
 };

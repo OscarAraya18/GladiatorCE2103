@@ -11,9 +11,10 @@
 #include <QDebug>
 #include <iostream>
 #include <sys/socket.h>
+#include "grafico.h"
 
 extern Game *game;
-
+extern grafico *Grafico;
 using namespace std;
 
 Converter* Converter::instance = 0;
@@ -50,6 +51,7 @@ void Converter:: funcionGeneral(const char* json){
         leerAtri1(json);
     }
     else if(document.HasMember("G2")){
+        cout<<"aqui estoy en 1"<<endl;
         leerAtri2(json);
     }
     else if(document.HasMember("camino1")){
@@ -60,6 +62,26 @@ void Converter:: funcionGeneral(const char* json){
     }
     else if(document.HasMember("camino2")){
         leerCamino2(json);
+    }
+    else if(document.HasMember("poblacion1")){
+
+        const Value& a = document["poblacion1"];
+
+        for (auto& v : a.GetArray()){
+             pasarFitness1(v.GetString());
+        }
+        string r = respuesta(3);
+        game->sendMessage(r.c_str());
+    }
+    else if(document.HasMember("poblacion2")){
+        const Value& a = document["poblacion2"];
+
+        for (auto& v : a.GetArray()){
+             pasarFitness2(v.GetString());
+        }
+        Grafico->desplegarGrafica(game->fitness1,game->fitness2);
+        Grafico->show();
+        game->close();
     }
 
 
@@ -196,17 +218,18 @@ void Converter::leerCamino1(const char *json)
         pasarPunto1(v.GetString());
     }
 
-    game->board->enemy->move_gladiator();
+    //game->board->enemy->move_gladiator();
 }
 
 void Converter::leerAtri2(const char *json)
 {
+    cout<<"aqui estoy en 2"<<endl;
     game->board->agregarGladiator2();
-
+    cout<<"aqui estoy en 3"<<endl;
     Document document;
 
     document.Parse(json);
-
+    cout<<"aqui estoy en 4"<<endl;
     int id;
     int edad;
     int probSupervivencia;
@@ -227,7 +250,7 @@ void Converter::leerAtri2(const char *json)
    fTroncoSupe = document["supe"].GetInt();
    fTroncoInfe = document["infe"].GetInt();
    resistencia = document["res"].GetDouble();
-
+    cout<<"aqui estoy en 5"<<endl;
    //se rellenan las specs2
    game->board->specs2->setIdT(QString::number(id));
    game->board->specs2->setEdadT(QString::number(edad));
@@ -239,7 +262,7 @@ void Converter::leerAtri2(const char *json)
    game->board->specs2->setFTroncoInfT(QString::number(fTroncoInfe));
    game->board->specs2->setResistenciaT(QString::number(resistencia));
 
-
+    cout<<"aqui estoy en 6"<<endl;
 }
 
 void Converter::leerCamino2(const char *json)
@@ -253,8 +276,8 @@ void Converter::leerCamino2(const char *json)
     for (auto& v : a.GetArray()){
         pasarPunto2(v.GetString());
     }
-    //game->board->enemy2->move_gladiator();
-    //game->board->enemy->move_gladiator();
+    game->board->enemy2->move_gladiator();
+    game->board->enemy->move_gladiator();
 
 }
 
@@ -268,8 +291,8 @@ void Converter::pasarPunto1(const char *json)
     int y;
     int vida;
 
-    x = document["x"].GetInt();
-    y = document["y"].GetInt();
+    x = document["x"].GetInt()-1;
+    y = document["y"].GetInt()-1;
     vida = document["vida"].GetInt();
 
     Point *p = new Point(x,y,vida);
@@ -286,11 +309,11 @@ void Converter::pasarPunto2(const char *json)
     int y;
     int vida;
 
-    x = document["x"].GetInt();
-    y = document["y"].GetInt();
+    x = document["x"].GetInt()-1;
+    y = document["y"].GetInt()-1;
     vida = document["vida"].GetInt();
 
-    Point *p = new Point(x,y,vida);
+    Point *p = new Point(y,x,vida);
     game->board->enemy2->camino.append(p);
 
 }
@@ -304,8 +327,8 @@ void Converter::pasarTorre1(const char *json)
     int x;
     int y;
 
-    x = document["x"].GetInt();
-    y = document["y"].GetInt();
+    x = document["x"].GetInt()-1;
+    y = document["y"].GetInt()-1;
 
     game->board->agregarTorre1(x,y);
 }
@@ -319,8 +342,8 @@ void Converter::pasarTorre2(const char *json)
     int x;
     int y;
 
-    x = document["x"].GetInt();
-    y = document["y"].GetInt();
+    x = document["x"].GetInt()-1;
+    y = document["y"].GetInt()-1;
 
     game->board->agregarTorre2(x,y);
 }
@@ -334,8 +357,8 @@ void Converter::pasarTorre3(const char *json)
     int x;
     int y;
 
-    x = document["x"].GetInt();
-    y = document["y"].GetInt();
+    x = document["x"].GetInt()-1;
+    y = document["y"].GetInt()-1;
 
     game->board->agregarTorre3(x,y);
 }
@@ -367,4 +390,41 @@ string Converter:: respuesta(int i){
     string mensaje = a.GetString();
 
     return mensaje;
+}
+
+string Converter::pedirDatosGrafica()
+{
+    StringBuffer a;
+    Writer<StringBuffer> writer(a);
+
+    writer.StartObject();
+    writer.Key("grafica");
+    writer.Int(1);
+
+    writer.EndObject();
+
+    string mensaje = a.GetString();
+
+    return mensaje;
+
+}
+
+void Converter::pasarFitness1(const char *json)
+{
+    Document document;
+
+    document.Parse(json);
+
+     game->fitness1.append(document["fitness"].GetDouble());
+
+}
+
+void Converter::pasarFitness2(const char *json)
+{
+    Document document;
+
+    document.Parse(json);
+    game->fitness2.append(document["fitness"].GetDouble());
+
+
 }

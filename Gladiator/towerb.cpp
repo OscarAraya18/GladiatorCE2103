@@ -42,7 +42,7 @@ TowerB::TowerB(QGraphicsItem *parent){
     //se conecta un timer con attack_target
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()),this, SLOT(aquire_target()));
-    timer->start(400);
+    timer->start(500);
 
 
 }

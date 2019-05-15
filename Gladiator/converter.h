@@ -100,6 +100,21 @@ public:
      * @return El mensaje tipo JSON.
      */
     string respuesta(int i);
+    /**
+     * @brief pedirDatosGrafica Realiza una peticion al servidor para que le envie los datos de la grafica.
+     * @return
+     */
+    string pedirDatosGrafica();
+    /**
+     * @brief pasarFitness1 Toma la informacion del JSON y llena una lista de fitness para la primera poblacion.
+     * @param json Una lista de fitness de la primera poblacion.
+     */
+    void pasarFitness1(const char *json);
+    /**
+     * @brief pasarFitness2 Toma la informacion del JSON y llena una lista de fitness para la segunda informacion.
+     * @param json Una lista de fitness de la segunda poblacion.
+     */
+    void pasarFitness2(const char *json);
 
 };
 #endif // CONVERTER_H

@@ -3,9 +3,9 @@
 #include <QThread>
 #include <QTimer>
 #include <qmath.h>
-
+#include "grafico.h"
 extern Game *game;
-
+extern grafico *Grafico;
 Enemy::Enemy(QGraphicsItem *parent ){
     setPixmap(QPixmap(":/images/enemy.png"));
     tiempo =0;
@@ -16,8 +16,6 @@ Enemy::Enemy(QGraphicsItem *parent ){
 
     timer = new QTimer();
     crono = new QTimer();
-    connect(crono, SIGNAL(timeout()), this, SLOT(actualizar_crono()));
-    crono->start(1000);
 
 }
 
@@ -37,7 +35,9 @@ void Enemy::move_gladiator()
     //conectar el timer con move()
 
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(600);
+    timer->start(800);
+    connect(crono, SIGNAL(timeout()), this, SLOT(actualizar_crono()));
+    crono->start(1000);
 }
 
 void Enemy::delete_gladiator(int x, int y)
@@ -51,15 +51,21 @@ void Enemy::delete_gladiator(int x, int y)
     game->scene->addItem(rip);
 
     connect(t, SIGNAL(timeout()), this, SLOT(rip_g()));
-    t->start(1000);
+    t->start(500);
+
 }
 
 void Enemy::move(){
     if(camino.length() >0){
         setPosDef(camino[0]->getFila(), camino[0]->getColumna());
-        game->board->specs->setVida(QString::number(camino[0]->getVida()));
+        game->board->specs->setResistenciaT(QString::number(camino[0]->getVida()));
         if(camino[0]->getVida()== 0){
+            game->board->specs->setResistenciaT(QString::number(0));
             delete_gladiator(camino[0]->getColumna()*70 +485, camino[0]->getFila()*70 -5);
+        }
+        if(camino[0]->getFila() == 9 && camino[0]->getColumna()==9){
+            game->sendMessage(game->converter->pedirDatosGrafica().c_str());
+            game->scene->removeItem(this);
         }
         camino.removeAt(0);
     }

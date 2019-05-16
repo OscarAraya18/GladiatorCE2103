@@ -4,14 +4,14 @@ Cliente::Cliente()
 {
 }
 
-bool Cliente::connectar()
+bool Cliente::conectar()
 {
     descriptor = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
 
     if(descriptor < 0)
         return false;
     info.sin_family = AF_INET;
-    info.sin_addr.s_addr = inet_addr("192.168.0.29");
+    info.sin_addr.s_addr = inet_addr("192.168.43.248");
     info.sin_port = ntohs(4050);
     memset(&info.sin_zero,0,sizeof(info.sin_zero));
 

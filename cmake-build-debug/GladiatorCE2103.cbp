@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="GladiatorCE2103"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GladiatorCE2103">
+				<Option output="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/GladiatorCE2103" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saymon/CLionProjects/GladiatorCE2103/."/>
+					<Add directory="/home/saymon/CLionProjects/GladiatorCE2103/include/rapidjson"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 GladiatorCE2103"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GladiatorCE2103/fast">
+				<Option output="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/GladiatorCE2103" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/saymon/CLionProjects/GladiatorCE2103/."/>
+					<Add directory="/home/saymon/CLionProjects/GladiatorCE2103/include/rapidjson"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 GladiatorCE2103/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/saymon/CLionProjects/GladiatorCE2103/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/Backtraking/Backtraking.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/Backtraking/Backtraking.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/comunicacion/server.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/comunicacion/server.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/comunicacion/transformer.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/comunicacion/transformer.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/entidades/TorreEnemiga.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/entidades/TorreEnemiga.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/ListaEnlazada.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/ListaEnlazada.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/ManejadorArchivos.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/ManejadorArchivos.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/Matriz.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/Matriz.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/Nodo.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/Nodo.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/NodoMatriz.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/estructurasLogicas/NodoMatriz.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/logica/AStar.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/logica/AStar.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/logica/Algoritmo.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/logica/Algoritmo.h">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/main.cpp">
+			<Option target="GladiatorCE2103"/>
+		</Unit>
+		<Unit filename="/home/saymon/CLionProjects/GladiatorCE2103/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

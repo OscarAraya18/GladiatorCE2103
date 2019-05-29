@@ -398,6 +398,8 @@ vector<NodoMatriz*> Matriz::listaRutaConVida(vector<NodoMatriz*> listaRuta, int 
             }
         }
 
+        //cout<<"LA VIDA EN LA POSICION ("<<nodoDeLista->fila<<" , "<<nodoDeLista->columna<<") ES "<<nodoDeLista->vida<<endl;
+
         if(vidaGladiador<=0){
             nodoDeLista->vida = 0;
             return listaRuta;
@@ -441,8 +443,12 @@ Matriz::Matriz(int cantidadFilas, int cantidadColumnas) {
         for (int fila = 1; fila <= cantidadFilas; fila++) {
 
 
-            NodoMatriz *nodoPosicion = (NodoMatriz*)malloc(sizeof(NodoMatriz));
+            /* USO
+             * DEL
+             * HEAP
+             */
 
+            NodoMatriz *nodoPosicion = (NodoMatriz*)malloc(sizeof(NodoMatriz));
 
 
             nodoPosicion->H = calculoDistancia(fila,columna);
@@ -453,8 +459,6 @@ Matriz::Matriz(int cantidadFilas, int cantidadColumnas) {
             nodoPosicion->posicionAbajo = posicionAbajo;
             nodoPosicion->fila = fila;
             nodoPosicion->columna = columna;
-
-           //NodoMatriz(calculoDistancia(fila,columna), contador,posicionIzquierda, posicionArriba, posicionDerecha, posicionAbajo, fila,columna);
 
             if (columna==1 && fila==1){
                 primeraPosicion = nodoPosicion;
@@ -508,9 +512,31 @@ void Matriz::mostrarMatriz() {
     int contadorColumnas = cantidadColumnas;
     int contadorAuxiliar = 1;
 
+    cout<<"IMPRIMIENDO MATRIZ QUE INDICA SI HAY TORRES (1 HAY, 0 NO HAY)"<<endl;
     while(contadorFilas>1) {
         while (contadorColumnas>0) {
             cout << "[" <<contadorPosicion->presenciaTorre<< "]  ";
+            contadorColumnas--;
+            contadorPosicion = contadorPosicion->getPosicionDerecha();
+        }
+        cout<<endl;
+        contadorFilas--;
+        contadorAuxiliar++;
+        contadorColumnas = cantidadColumnas;
+        contadorPosicion = mostrarPosicion(contadorAuxiliar, 1);
+    }
+
+    cout<<endl<<endl;
+
+    contadorPosicion = primeraPosicion;
+    contadorFilas = cantidadFilas;
+    contadorColumnas = cantidadColumnas;
+    contadorAuxiliar = 1;
+
+    cout<<"IMPRIMIENDO MATRIZ QUE INDICA EL ID DEL NODO"<<endl;
+    while(contadorFilas>1) {
+        while (contadorColumnas>0) {
+            cout << "[" <<contadorPosicion->getID()<< "]  ";
             contadorColumnas--;
             contadorPosicion = contadorPosicion->getPosicionDerecha();
         }
@@ -557,6 +583,9 @@ void Matriz::colocarTorres() {
                 colocar->setTorreEnemiga(nullptr);
                 colocar->presenciaTorre = false;
             } else {
+
+                cout<<"SE HA COLOCADO UNA TORRE EN LA POSICION (" <<colocar->fila<<" , "<<colocar->columna<<")"<<endl;
+
                 cantidadTorres++;
                 if(columnaAleatoria==1){
                     colocar->correccion = true;
@@ -568,5 +597,197 @@ void Matriz::colocarTorres() {
     }
 }
 
+void Matriz::moverTorres() {
 
 
+    NodoMatriz *nodoActual = primeraPosicion;
+    int contadorFilas = cantidadFilas;
+    int contadorColumnas = cantidadColumnas;
+    int contadorAuxiliar = 1;
+
+    while(contadorFilas>1) {
+        while (contadorColumnas>0) {
+            if(nodoActual->presenciaTorre){
+                AStar* astar = new AStar();
+                bool flag = false;
+                TorreEnemiga* torrePrueba = new TorreEnemiga(nodoActual->getTorreEnemiga()->getTipoTorre());
+
+
+                    NodoMatriz* norte = nodoActual->getPosicionArriba();
+                    NodoMatriz* este = nodoActual->getPosicionDerecha();
+                    NodoMatriz* sur = nodoActual->getPosicionAbajo();
+                    NodoMatriz* oeste = nodoActual->getPosicionIzquierda();
+
+                    NodoMatriz *noreste = nullptr;
+                    NodoMatriz *sureste = nullptr;
+                    NodoMatriz *suroeste = nullptr;
+                    NodoMatriz *noroeste = nullptr;
+
+                    if(norte!= nullptr){
+                        if(oeste!= nullptr) {
+                            noroeste = nodoActual->getPosicionArriba()->getPosicionIzquierda();
+                        }
+                        if(este!= nullptr){
+                            noreste = nodoActual->getPosicionArriba()->getPosicionDerecha();
+                        }
+                    }
+
+                    if(sur!= nullptr){
+                        if(oeste!= nullptr){
+                            suroeste = nodoActual->getPosicionAbajo()->getPosicionIzquierda();
+                        }
+                        if(este!= nullptr){
+                            sureste = nodoActual->getPosicionAbajo()->getPosicionDerecha();
+                        }
+                    }
+
+
+
+                    if(norte!= nullptr && !flag){
+                        if(!norte->presenciaTorre && (norte->getID() != 1)){
+                            nodoActual->getPosicionArriba()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionArriba()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionArriba()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+
+                    }
+
+                    if(noreste!= nullptr && !flag){
+                        if(!noreste->presenciaTorre){
+                            nodoActual->getPosicionArriba()->getPosicionDerecha()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionArriba()->getPosicionDerecha()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionArriba()->getPosicionDerecha()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(este!= nullptr && !flag){
+                        if(!este->presenciaTorre && (este->getID()!=100)){
+                            nodoActual->getPosicionDerecha()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionDerecha()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionDerecha()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(sureste!= nullptr && !flag){
+                        if(!sureste->presenciaTorre && (sureste->getID()!=100)){
+                            nodoActual->getPosicionAbajo()->getPosicionDerecha()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado ){
+                                nodoActual->getPosicionAbajo()->getPosicionDerecha()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionAbajo()->getPosicionDerecha()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(sur!= nullptr && !flag){
+                        if(!sur->presenciaTorre && (sur->getID()!=100)){
+                            nodoActual->getPosicionAbajo()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionAbajo()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionAbajo()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(suroeste!= nullptr && !flag){
+                        if(!suroeste->presenciaTorre){
+                            nodoActual->getPosicionAbajo()->getPosicionIzquierda()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionAbajo()->getPosicionIzquierda()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionAbajo()->getPosicionIzquierda()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(oeste!= nullptr && !flag){
+                        if(!oeste->presenciaTorre && (oeste->getID()!=1)){
+                            nodoActual->getPosicionIzquierda()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionIzquierda()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionIzquierda()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(noroeste!= nullptr && !flag){
+                        if(!noroeste->presenciaTorre && (noroeste->getID()!=1)){
+                            nodoActual->getPosicionIzquierda()->getPosicionArriba()->setTorreEnemiga(torrePrueba);
+                            astar->iniciar(this);
+                            if(!astar->destinoEncontrado){
+                                nodoActual->getPosicionIzquierda()->getPosicionArriba()->setTorreEnemiga(nullptr);
+                                nodoActual->getPosicionIzquierda()->getPosicionArriba()->presenciaTorre = false;
+                            }else{
+                                flag = true;
+                            }
+                        }
+                    }
+
+                    if(flag){
+
+                        nodoActual->setTorreEnemiga(nullptr);
+                        nodoActual->presenciaTorre = false;
+                    }
+
+
+                }
+                contadorColumnas--;
+                nodoActual = nodoActual->getPosicionDerecha();
+
+            }
+
+            contadorFilas--;
+            contadorAuxiliar++;
+            contadorColumnas = cantidadColumnas;
+            nodoActual = mostrarPosicion(contadorAuxiliar, 1);
+        }
+
+
+    }
+
+void Matriz::generarListaTorres() {
+    listaTorres.clear();
+    NodoMatriz *contadorPosicion = primeraPosicion;
+    int contadorFilas = cantidadFilas;
+    int contadorColumnas = cantidadColumnas;
+    int contadorAuxiliar = 1;
+
+    while(contadorFilas>1) {
+        while (contadorColumnas>0) {
+            if(contadorPosicion->presenciaTorre){
+                listaTorres.push_back(contadorPosicion);
+            }
+            contadorColumnas--;
+            contadorPosicion = contadorPosicion->getPosicionDerecha();
+        }
+        contadorFilas--;
+        contadorAuxiliar++;
+        contadorColumnas = cantidadColumnas;
+        contadorPosicion = mostrarPosicion(contadorAuxiliar, 1);
+    }
+}

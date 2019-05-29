@@ -109,10 +109,9 @@ TEST(BacktrackingTest, rutaBack){
 
 TEST(aStartTest, rutaAstar){
 
-    ASSERT_EQ(0, astar->getListaRuta().size());
+    EXPECT_EQ(0, astar->getListaRuta().size());
 
-    backtracking->actualizarMatrizLogica(matrizJuego);
-    backtracking->runBackTracking(0,0,9,9);
+    astar->iniciar(matrizJuego);
 
     EXPECT_LT(9, backtracking->getListaRuta().size());
 }
@@ -177,12 +176,27 @@ TEST(GeneticoTest, generarPoblacion){
 }
 
 TEST(matrizTest, rutaVida){
+    matrizJuego->mostrarPosicion(1,1)->presenciaTorre= false;
+    //Se colocan 3 torres
     matrizJuego->colocarTorres();
-    astar->iniciar(matrizJuego);
-    //vector<NodoMatriz*> vec = matrizJuego->listaRutaConVida(astar->getListaRuta(), 10);
+    matrizJuego->generarListaTorres();
 
-    //cout << "PUTA " << vec.at(0)->vida << endl;
-    //EXPECT_EQ(10, vec.at(0)->vida);
+    //Deben de haber 3 torres
+    EXPECT_EQ(3,matrizJuego->listaTorres.size());
+
+    astar->iniciar(matrizJuego);
+
+
+    vector<NodoMatriz*> rutaSinVida1 = astar->getListaRuta();
+
+    //La ruta debe de tener 0 de vida en su primera posición, ya que esta no se ha asignado
+    EXPECT_EQ(0, rutaSinVida1.at(0)->vida);
+
+    vector<NodoMatriz*> rutaConVida1 = matrizJuego->listaRutaConVida(rutaSinVida1, 10);
+
+    //La ruta debe de tener un numero diferente de 0 en la primera posicion
+    //ya que el algoritmo anterior le asigna la vida
+    EXPECT_NE(0, rutaConVida1.at(0)->vida);
 
 
 }

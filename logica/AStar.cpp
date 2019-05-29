@@ -56,7 +56,7 @@ void AStar::tracePath(cell detallesPosicion[][COL], Pair posicionFinal){
     }
 
     mejorRuta.push(make_pair (fila, columna));
-
+    listaDeRuta.clear();
 
     while (!mejorRuta.empty()){
         pair<int,int> p = mejorRuta.top();
@@ -94,11 +94,6 @@ void AStar::tracePath(cell detallesPosicion[][COL], Pair posicionFinal){
 
 
 void AStar::aStarSearch(int grid[][COL], Pair posicionInicial, Pair posicionFinal){
-
-    cout<<"IMPRIMIENDO LA LISTA CERRADA: "<<endl;
-
-
-
 
     bool listaCerrada[ROW][COL];
 
@@ -369,7 +364,7 @@ void AStar::aStarSearch(int grid[][COL], Pair posicionInicial, Pair posicionFina
 
 
     if (!destinoEncontrado) {
-        printf("Failed to find the Destination Cell\n");
+        cout<<"NO SE HA ENCONTRADO UNA RUTA"<<endl;
     }
 
 
@@ -381,6 +376,7 @@ void AStar::actualizarMatrizLogica() {
     cout<<"MOSTRANDO MATRIZ DE ALGORITMO PATHFINDING A*"<<endl<<endl;
     for(int i=1; i<=cantidadColumnas; i++){
         for(int j=1; j<=cantidadFilas; j++){
+            matrizJuego->mostrarPosicion(i,j)->vida =0;
             if(matrizJuego->mostrarPosicion(i,j)->presenciaTorre){
                 matrizLogica[i-1][j-1] = 0;
                 cout<<"0 ";
@@ -408,5 +404,4 @@ void AStar::iniciar(Matriz* matrizJuego){
 AStar::AStar() {
     posicionInicial = make_pair(0,0);
     posicionFinal = make_pair(9,9);
-
 }
